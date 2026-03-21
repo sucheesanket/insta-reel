@@ -61,13 +61,13 @@ async function loginController(req,res){
         ]
     })
     if(!user){
-        res.status(404).json({
+       return res.status(404).json({
             message: "user not found"
         })
     }
     const hash = crypto.createHash('sha256').update(password).digest('hex')
 
-    const isPasswordValid = hash == user.password
+    const isPasswordValid = hash === user.password
 
     if (!isPasswordValid) {
         return res.status(401).json({
